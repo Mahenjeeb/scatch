@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
-
+const config = require('config');
+const debug = require('debug')("development:mongoose");
 const dbConn = async () => {
     try {
-        await mongoose.connect("mongodb://127.0.0.1/scatch")
-        console.log("connected")
+        await mongoose.connect(`${config.get("MongoDB_URI")}/scatch`);
+        debug("connected")
     } catch (error) {
-       console.log(error.message) 
+        debug(error.message) 
     }
 }
 

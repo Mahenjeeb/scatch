@@ -10,6 +10,8 @@ app.set("view engine","ejs");
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname,"public")));
+
+//Handling Routes
 app.use("/owners", ownersRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
