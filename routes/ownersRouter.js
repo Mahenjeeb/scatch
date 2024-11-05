@@ -6,19 +6,22 @@ if(process.env.NODE_ENV == "development") {
     router.post("/create", async(req,resp) => {
         let owner = await ownerModel.find();
         if(owner.length > 0) {
-            return resp.status(500).send("A owner already exists")
+            resp.send("A owner already exists")
         } else {
             let {fullname, email, password} = req.body;
             let createdOwner = await ownerModel.create({
-                fullname,email,password
+                fullname,
+                email,
+                password
             })
-           return resp.status(200).send(`${fullname} - Owner Created`)
+           resp.send("Owner Created")
         }
     })
 }
 
-router.get("/", (req,resp) => {
-    resp.send("I am owner")
+router.get("/admin", (req,resp) => {
+    let success = req.flash("success");
+    resp.render("createproducts",{success})
 })
 
 
